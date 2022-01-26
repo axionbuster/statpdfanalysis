@@ -4,10 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef enum {
-  WAIT_FOR_LENGTH,
-  WAIT_FOR_FILTER
-} ParseState;
+typedef enum { WAIT_FOR_LENGTH, WAIT_FOR_FILTER } ParseState;
 
 int main(void) {
   char *line = NULL;
@@ -28,15 +25,20 @@ int main(void) {
       int type, version;
       if (sscanf(line, "%d %d obj", &type, &version) == 2)
         printf("Found obj decl., t = %d, v = %d\n", type, version);
+      else if (!strncmp(line, "<<", sizeof("<<") - 1))
+        printf("<< found, line %zu\n", n_lines);
+      else if (!strncmp(line, ">>", sizeof(">>") - 1))
+        printf(">> found, line %zu\n", n_lines);
       else if (!strncmp(line, "/Length", sizeof("/Length") - 1))
         printf("Found /Length, line %zu\n", n_lines);
-      else if (!strncmp(line, "/Filter /FlateDecode", sizeof("/Filter /FlateDecode") - 1))
+      else if (!strncmp(line, "/Filter /FlateDecode",
+                        sizeof("/Filter /FlateDecode") - 1))
         printf("Found /Filter, line %zu\n", n_lines);
       else if (!strncmp(line, "stream", sizeof("stream") - 1))
         printf("Found \"stream\", line %zu\n", n_lines);
-      else if (!strncmp(line, "endstream", sizeof ("endstream") - 1))
+      else if (!strncmp(line, "endstream", sizeof("endstream") - 1))
         printf("Found \"endstream\", line %zu\n", n_lines);
-      else if (!strncmp(line, "endobj", sizeof ("endobj") - 1))
+      else if (!strncmp(line, "endobj", sizeof("endobj") - 1))
         printf("Found \"endobj\", line %zu\n", n_lines);
     }
   }
