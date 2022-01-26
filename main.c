@@ -21,7 +21,7 @@ int main(void) {
 
     bool ascii = true;
     for (ssize_t i = 0; i < read; i++) {
-      ascii = (ascii && isascii(line[i])) ? ascii : false;
+      ascii = (ascii && line[i] && isascii(line[i])) ? ascii : false;
     }
 
     if (ascii) {
