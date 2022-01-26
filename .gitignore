@@ -5,3 +5,8 @@
 !*.h
 !.clang-format
 !README.md
+!CMakeLists.txt
+!conanfile.txt
+!example-in
+!example-in/*.pdf
+!example-in/*.txt
