@@ -4,3 +4,4 @@
 !*.c
 !*.h
 !.clang-format
+!README.md
